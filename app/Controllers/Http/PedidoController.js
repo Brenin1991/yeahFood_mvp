@@ -30,6 +30,9 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+    const p = request.all();
+    
+    console.log(p);
   }
 
   /**

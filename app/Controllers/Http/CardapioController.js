@@ -21,7 +21,7 @@ class CardapioController {
    */
   async index ({ request, response, view }) {
     const cardapio = (await Database.select('*').from('cardapios'));
-    console.log(cardapio);
+    //console.log(cardapio);
     return view.render('home', { cardapio });
   }
 

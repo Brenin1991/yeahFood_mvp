@@ -88,34 +88,40 @@
                     <!--col-sm-12-->
                 </div>
                 <!--row-->
-                @each(c in cardapio)
-                    <div class="row">
-                        <div class="col-md-6 food-menu pizza">
-                            <div class="sided-90x mb-30 ">
-                                <div class="s-left"><img class="br-3" src="{{ c.imagem }}" alt="Menu Image"></div>
-                                <!--s-left-->
-                                <div class="s-right">
-                                    <h5 class="mb-10"><b>{{{ c.nome }}</b><b class="color-primary float-right">{{ c.preco }}</b></h5>
-                                    <p class="pr-70">{{ c.descricao }}</p>
+                <form action="{{ route('pedido') }}" method="post">
+                    {{ csrfField() }}
+                    @each(c in cardapio)
+                        <div class="row">
+                            <div class="col-md-6 food-menu pizza">
+                                <div class="sided-90x mb-30 ">
+                                    <div class="s-left"><img class="br-3" src="{{ c.imagem }}" alt="Menu Image"></div>
+                                    <!--s-left-->
+                                    <div class="s-right">
+                                        <h5 class="mb-10"><b>{{{ c.nome }}</b><b class="color-primary float-right">{{ c.preco }}</b></h5>
+                                        <p class="pr-70">{{ c.descricao }}</p>
+                                    </div>
+                                    <div class="input-group mb-3" class="control">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <input type="hidden" id="name" name=" {{c.id}} " value="{{c.nome}}">
+                                                <input type="hidden" id="name" name=" {{c.id}} " value="{{c.preco}}">
+                                                <input type="Checkbox" aria-label="Checkbox for following text input" name=" {{c.id}} "/></div>
+                                        </div><select class="custom-select" id="inputGroupSelect01" name=" {{c.id}} "><option selected="1">1</option><option value="2">2</option><option value="3">3</option><option value="3">3</option><option value="3">4</option><option value="3">5</option><option value="3">6</option><option value="3">7</option><option value="3">8</option><option value="3">9</option><option value="3">10</option></select>
+                                        <!-- s-right-->
+                                        <!-- sided-90x-->
+                                        <!-- food-menu-->
+                                    </div>
+                                    <!--s-right-->
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><input type="checkbox" aria-label="Checkbox for following text input" /></div>
-                                    </div><select class="custom-select" id="inputGroupSelect01"><option selected="1">1</option><option value="2">2</option><option value="3">3</option><option value="3">3</option><option value="3">4</option><option value="3">5</option><option value="3">6</option><option value="3">7</option><option value="3">8</option><option value="3">9</option><option value="3">10</option></select>
-                                    <!-- s-right-->
-                                    <!-- sided-90x-->
-                                    <!-- food-menu-->
-                                </div>
-                                <!--s-right-->
+                                <!-- sided-90x -->
                             </div>
-                            <!-- sided-90x -->
+                            <!-- food-menu -->
                         </div>
-                        <!-- food-menu -->
-                    </div>
-                    <!-- row -->
-                @endeach
-
-                <h6 class="center-text mt-40 mt-sm-20 mb-30"><a href="#" class="btn-primaryc plr-25"><b>FAZER PEDIDO AGORA!</b></a></h6>
+                        <!-- row -->
+                    @endeach
+                    <button class="center-text mt-40 mt-sm-20 mb-30" type="submit"><a class="btn-primaryc plr-25"><b>FAZER PEDIDO AGORA!</b></a></h6>
+                    </button>
+                </form>
             </div>
         <!-- container -->
         @else
