@@ -103,10 +103,12 @@
                                     <div class="input-group mb-3" class="control">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="hidden" id="name" name=" {{c.id}} " value="{{c.nome}}">
-                                                <input type="hidden" id="name" name=" {{c.id}} " value="{{c.preco}}">
-                                                <input type="Checkbox" aria-label="Checkbox for following text input" name=" {{c.id}} "/></div>
-                                        </div><select class="custom-select" id="inputGroupSelect01" name=" {{c.id}} "><option selected="1">1</option><option value="2">2</option><option value="3">3</option><option value="3">3</option><option value="3">4</option><option value="3">5</option><option value="3">6</option><option value="3">7</option><option value="3">8</option><option value="3">9</option><option value="3">10</option></select>
+                                                <input type="hidden" id="name" name="id[{{c.id}}]" value="{{c.id}}">
+                                                <input type="hidden" id="name" name="nome[{{c.id}}]" value="{{c.nome}}">
+                                                <input type="hidden" id="name" name="preco[{{c.id}}]" value="{{c.preco}}">
+                                                <input type="Checkbox" aria-label="Checkbox for following text input" name="{{c.id}}"/></div>
+                                        </div><select class="custom-select" id="inputGroupSelect01" name="quantidade[{{c.id}}]"><option selected="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>
+                                        <input type="hidden" id="name" name="precoTotal[{{c.id}}]" value="">
                                         <!-- s-right-->
                                         <!-- sided-90x-->
                                         <!-- food-menu-->

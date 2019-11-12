@@ -30,8 +30,14 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-    const p = request.all();
-    
+    const p = request.collect(['id', 'nome', 'preco', 'quantidade', 'precoTotal']);
+    let precoTotal;
+    p.forEach(t => {
+        t.id = parseInt(t.id);
+        t.preco = parseFloat(t.preco);
+        t.quantidade = parseFloat(t.quantidade)
+        t.precoTotal = 1 * t.preco * t.quantidade;
+    });
     console.log(p);
   }
 
