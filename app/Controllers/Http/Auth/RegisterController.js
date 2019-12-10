@@ -7,7 +7,7 @@ const Mail = use('Mail')
 
 class RegisterController {
   showRegisterForm ({ view }) {
-    return view.render('auth.register')
+    return view.render('auth.register', {title: `Registrar`})
   }
 
   async register ({ request, session, response }) {
@@ -44,7 +44,7 @@ class RegisterController {
     session.flash({
       notification: {
         type: 'success',
-        message: 'Registration successful! A mail has been sent to your email address, please confirm your email address.'
+        message: 'Registro bem-sucedido! Uma mensagem foi enviada para o seu endereço de e-mail. Confirme seu endereço de e-mail.'
       }
     })
 
@@ -66,7 +66,7 @@ class RegisterController {
     session.flash({
       notification: {
         type: 'success',
-        message: 'Your email address has been confirmed.'
+        message: 'O seu endereço de email foi confirmado.'
       }
     })
 

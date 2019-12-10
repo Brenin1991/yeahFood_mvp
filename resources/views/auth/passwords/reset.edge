@@ -1,63 +1,29 @@
 @layout('layout.app')
 
 @section('content')
-  <div class="columns">
-    <div class="column is-4 is-offset-4">
-      <h2 class="title has-text-centered">Reset Password</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5 text-center">
+          <div class="card-body">
+            <h3 class="card-title">Alterar senha</h3>
+              @include('includes.notification')
+              <form action="/password/reset" method="post">
+                {{ csrfField() }}
+                <input type="hidden" name="token" value="{{ token }}">
 
-      @include('includes.notification')
+                <div class="form-group"><input class="form-control input {{ hasErrorFor('email') ? 'danger' : '' }}" id="exampleInputEmail1" type="email" name="email" placeholder="E-mail" /></div>
 
-      <form action="/password/reset" method="post">
-        {{ csrfField() }}
+                <div class="form-group"><input class="form-control input {{ hasErrorFor('password') ? 'danger' : '' }}" id="exampleInputPassword1" type="password" name="password" placeholder="Nova senha" /></div>
 
-        <input type="hidden" name="token" value="{{ token }}">
+                <div class="form-group"><input class="form-control input {{ hasErrorFor('password_confirmation') ? 'danger' : '' }}" id="exampleInputPassword1" type="password" name="password_confirmation" placeholder="Confirmar senha" /></div>
 
-        <div class="field">
-          <label class="label">Email</label>
 
-          <div class="control">
-            <input
-              type="email"
-              class="input {{ hasErrorFor('email') ? 'is-danger' : '' }}"
-              name="email"
-              value="{{ old('email', '') }}">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Atualizar</button>
+              </form>
           </div>
-
-          {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
         </div>
-
-        <div class="field">
-          <label class="label">Password</label>
-
-          <div class="control">
-            <input
-              type="password"
-              class="input {{ hasErrorFor('password') ? 'is-danger' : '' }}"
-              name="password"
-              value="{{ old('password', '') }}">
-          </div>
-
-          {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
-        </div>
-
-        <div class="field">
-          <label class="label">Confirm Password</label>
-
-          <div class="control">
-            <input
-              type="password"
-              class="input {{ hasErrorFor('password_confirmation') ? 'is-danger' : '' }}"
-              name="password_confirmation"
-              value="{{ old('password_confirmation', '') }}">
-          </div>
-
-          {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('password_confirmation'), hasErrorFor('password_confirmation')) }}
-        </div>
-
-        <div class="control">
-          <button type="submit" class="button is-dark is-fullwidth is-capitalized">Reset password</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 @endsection

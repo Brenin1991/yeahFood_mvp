@@ -3,14 +3,15 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Database = use('Database')
+const Complemento = use('App/Models/Complemento')
 /**
- * Resourceful controller for interacting with pedidos
+ * Resourceful controller for interacting with complementos
  */
-class PedidoController {
+class ComplementoController {
   /**
-   * Show a list of all pedidos.
-   * GET pedidos
+   * Show a list of all complementos.
+   * GET complementos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -18,13 +19,11 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-
-    
   }
 
   /**
-   * Render a form to be used for creating a new pedido.
-   * GET pedidos/create
+   * Render a form to be used for creating a new complemento.
+   * GET complementos/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -32,24 +31,30 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-
-    return view.render('admin.pedido.pedido')
+    const complementos = (await Database.select('*').from('complementos'))
+    return view.render('admin.cardapio.complemento.create', {complementos})
   }
 
   /**
-   * Create/save a new pedido.
-   * POST pedidos
+   * Create/save a new complemento.
+   * POST complementos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const complemento = await Database.table('complementos').insert({
+      descricao: request.input('descricao'),
+      valor: request.input('valor')
+    })
+
+    response.redirect('/complemento/add')
   }
 
   /**
-   * Display a single pedido.
-   * GET pedidos/:id
+   * Display a single complemento.
+   * GET complementos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -60,8 +65,8 @@ class PedidoController {
   }
 
   /**
-   * Render a form to update an existing pedido.
-   * GET pedidos/:id/edit
+   * Render a form to update an existing complemento.
+   * GET complementos/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -72,8 +77,8 @@ class PedidoController {
   }
 
   /**
-   * Update pedido details.
-   * PUT or PATCH pedidos/:id
+   * Update complemento details.
+   * PUT or PATCH complementos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -83,8 +88,8 @@ class PedidoController {
   }
 
   /**
-   * Delete a pedido with id.
-   * DELETE pedidos/:id
+   * Delete a complemento with id.
+   * DELETE complementos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -94,4 +99,4 @@ class PedidoController {
   }
 }
 
-module.exports = PedidoController
+module.exports = ComplementoController

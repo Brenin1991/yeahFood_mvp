@@ -5,12 +5,12 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with pedidos
+ * Resourceful controller for interacting with enderecos
  */
-class PedidoController {
+class EnderecoController {
   /**
-   * Show a list of all pedidos.
-   * GET pedidos
+   * Show a list of all enderecos.
+   * GET enderecos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -18,13 +18,11 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-
-    
   }
 
   /**
-   * Render a form to be used for creating a new pedido.
-   * GET pedidos/create
+   * Render a form to be used for creating a new endereco.
+   * GET enderecos/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -32,13 +30,11 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-
-    return view.render('admin.pedido.pedido')
   }
 
   /**
-   * Create/save a new pedido.
-   * POST pedidos
+   * Create/save a new endereco.
+   * POST enderecos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -48,8 +44,8 @@ class PedidoController {
   }
 
   /**
-   * Display a single pedido.
-   * GET pedidos/:id
+   * Display a single endereco.
+   * GET enderecos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -60,8 +56,8 @@ class PedidoController {
   }
 
   /**
-   * Render a form to update an existing pedido.
-   * GET pedidos/:id/edit
+   * Render a form to update an existing endereco.
+   * GET enderecos/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -72,8 +68,8 @@ class PedidoController {
   }
 
   /**
-   * Update pedido details.
-   * PUT or PATCH pedidos/:id
+   * Update endereco details.
+   * PUT or PATCH enderecos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -83,8 +79,8 @@ class PedidoController {
   }
 
   /**
-   * Delete a pedido with id.
-   * DELETE pedidos/:id
+   * Delete a endereco with id.
+   * DELETE enderecos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -94,4 +90,4 @@ class PedidoController {
   }
 }
 
-module.exports = PedidoController
+module.exports = EnderecoController

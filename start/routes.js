@@ -14,9 +14,9 @@
 */
 
 const Route = use('Route')
+Route.get('/', 'YeahFoodController.index')
 
-Route.get('/home', 'CardapioController.index')
-
+//auth
 Route.get('register', 'Auth/RegisterController.showRegisterForm').middleware([
   'authenticated'
 ])
@@ -31,5 +31,19 @@ Route.get('password/reset', 'Auth/PasswordResetController.showLinkRequestForm')
 Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 Route.post('password/reset', 'Auth/PasswordResetController.reset')
-
-Route.post('pedido', 'PedidoController.create').as('pedido')
+//cliente
+Route.get('carrinho', 'YeahFoodController.carrinho')
+//admin
+Route.get('dashboard', 'YeahFoodController.dashboard')
+Route.get('pedidos', 'PedidoController.index')
+//produto
+Route.get('cardapio', 'ProdutoController.index')
+Route.get('cardapio/add', 'ProdutoController.create')
+Route.post('cardapio/add', 'ProdutoController.store')
+//Categoria
+Route.get('categoria/add', 'CategoriaController.create')
+Route.post('categoria/add', 'CategoriaController.store')
+Route.get('categoria/delete/:id', 'CategoriaController.destroy')
+//Complemento
+Route.get('complemento/add', 'ComplementoController.create')
+Route.post('complemento/add', 'ComplementoController.store')

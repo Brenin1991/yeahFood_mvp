@@ -9,7 +9,7 @@ const Hash = use('Hash')
 
 class PasswordResetController {
   showLinkRequestForm ({ view }) {
-    return view.render('auth.passwords.email')
+    return view.render('auth.passwords.email', {title: `Recuperar`})
   }
 
   async sendResetLinkEmail ({ request, session, response }) {
@@ -50,7 +50,7 @@ class PasswordResetController {
       session.flash({
         notification: {
           type: 'success',
-          message: 'A password reset link has been sent to your email address.'
+          message: 'Um link de recuperação foi enviado ao seu e-mail.'
         }
       })
 
@@ -59,7 +59,7 @@ class PasswordResetController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Sorry, there is no user with this email address.'
+          message: 'Desculpe, não há usuário com este endereço de e-mail.'
         }
       })
 
@@ -102,7 +102,7 @@ class PasswordResetController {
         session.flash({
           notification: {
             type: 'danger',
-            message: 'This password reset token does not exist.'
+            message: 'Este token de redefinição de password não existe.'
           }
         })
 
@@ -119,7 +119,7 @@ class PasswordResetController {
       session.flash({
         notification: {
           type: 'success',
-          message: 'Your password has been reset!'
+          message: 'Sua password foi alterada!'
         }
       })
 
@@ -129,7 +129,7 @@ class PasswordResetController {
       session.flash({
         notification: {
           type: 'danger',
-          message: 'Sorry, there is no user with this email address.'
+          message: 'Desculpe, não há usuário com este endereço de e-mail.'
         }
       })
 

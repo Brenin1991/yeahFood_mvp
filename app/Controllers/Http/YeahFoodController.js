@@ -5,12 +5,12 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with pedidos
+ * Resourceful controller for interacting with produtos
  */
-class PedidoController {
+class YeahFoodController {
   /**
-   * Show a list of all pedidos.
-   * GET pedidos
+   * Show a list of all produtos.
+   * GET produtos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -19,12 +19,25 @@ class PedidoController {
    */
   async index ({ request, response, view }) {
 
-    
+    return view.render('home')
   }
 
+  async carrinho ({ request, response, view }) {
+
+    return view.render('auth.pedido.carrinho')
+  }
+
+  async dashboard ({ request, response, view }) {
+
+    return view.render('admin.home')
+  }
+
+
+
+
   /**
-   * Render a form to be used for creating a new pedido.
-   * GET pedidos/create
+   * Render a form to be used for creating a new produto.
+   * GET produtos/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -32,13 +45,11 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-
-    return view.render('admin.pedido.pedido')
   }
 
   /**
-   * Create/save a new pedido.
-   * POST pedidos
+   * Create/save a new produto.
+   * POST produtos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -48,8 +59,8 @@ class PedidoController {
   }
 
   /**
-   * Display a single pedido.
-   * GET pedidos/:id
+   * Display a single produto.
+   * GET produtos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -60,8 +71,8 @@ class PedidoController {
   }
 
   /**
-   * Render a form to update an existing pedido.
-   * GET pedidos/:id/edit
+   * Render a form to update an existing produto.
+   * GET produtos/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -72,8 +83,8 @@ class PedidoController {
   }
 
   /**
-   * Update pedido details.
-   * PUT or PATCH pedidos/:id
+   * Update produto details.
+   * PUT or PATCH produtos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -83,8 +94,8 @@ class PedidoController {
   }
 
   /**
-   * Delete a pedido with id.
-   * DELETE pedidos/:id
+   * Delete a produto with id.
+   * DELETE produtos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -94,4 +105,4 @@ class PedidoController {
   }
 }
 
-module.exports = PedidoController
+module.exports = YeahFoodController

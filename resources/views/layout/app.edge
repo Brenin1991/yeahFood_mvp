@@ -4,48 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Complete Authentication In AdonisJs</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+  <title>YeahFood! - {{title}}</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="plugin-frameworks/swiper.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="../admin/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../common/style.css" rel="stylesheet" />
+
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-custom" >
+      <a class="navbar-brand logo-txt" href="/">YeahFood!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <ion-icon name="menu"></ion-icon>
+      </button>
 
-  <nav class="navbar is-dark">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/home">Voltar</a>
-
-        <button class="button navbar-burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-
-      <div class="navbar-menu">
-        <div class="navbar-end">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
           @loggedIn
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                {{ auth.user.username }}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 {{ auth.user.username }}
               </a>
-              <div class="navbar-dropdown">
-                <a class="navbar-item" href="/logout">Logout</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/dashboard">Carrinho</a>
+                <a class="dropdown-item" href="#">Configurações da conta</a>
+                <a class="dropdown-item" href="#">Histórico de pedidos</a>
+                <a class="dropdown-item" href="/logout">Sair</a>
               </div>
-            </div>
-          @else
-            <a class="navbar-item" href="/login">Login</a>
-            <a class="navbar-item" href="/register">Register</a>
+            </li>
           @endloggedIn
+        </ul>
+        @loggedIn
+        <ul class="navbar-nav mr-auto">
+          
+        </ul>
+        
+        <div class="navbar-item has-dropdown is-hoverable">
+             
         </div>
+        @else
+        <ul class="inline my-2 my-lg-0">
+          <a class="btn btn-outline-warning my-2 my-sm-0" href="/login" role="button" aria-pressed="true">Login</a>
+          <a class="btn btn-warning my-2 my-sm-0" href="/register" role="button" aria-pressed="true">Registrar</a>
+        </ul>
+        @endloggedIn
+      </div>
+    </nav>
+  
+    <div class="section">
+      <div class="container">
+        @!section('content')
       </div>
     </div>
-  </nav>
 
-  <div class="section">
-    <div class="container">
-      @!section('content')
-    </div>
-  </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const Hash = use('Hash')
 
 class LoginController {
   showLoginForm ({ view }) {
-    return view.render('auth.login')
+    return view.render('auth.login', {title: `Login`})
   }
 
   async login ({ request, auth, session, response }) {
@@ -26,7 +26,7 @@ class LoginController {
         // login user
         await auth.remember(!!remember).login(user)
 
-        return response.route('home')
+        return response.route('/')
       }
     }
 
@@ -34,7 +34,7 @@ class LoginController {
     session.flash({
       notification: {
         type: 'danger',
-        message: `We couldn't verify your credentials. Make sure you've confirmed your email address.`
+        message: `Não foi possível verificar suas credenciais. Verifique se você confirmou seu endereço de e-mail.`
       }
     })
 

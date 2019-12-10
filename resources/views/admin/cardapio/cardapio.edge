@@ -1,0 +1,52 @@
+@layout('admin.layout.app')
+
+@section('content')
+  <div class="container">
+    <div class="card card-signin my-5 text-center">
+      <div class="card-body">
+        <h3 class="card-title">Cardápio <span class="badge badge-warning">{{n}}</span></h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Excluir</th>
+              </tr>
+            </thead>
+            <tbody>
+              @each(p in produtos)
+                <tr>
+                  <td><a href="#">{{p.nome}}</a></td>
+                  <td>{{p.preco}}</td>
+                  <td>
+                    <button class="btn btn-outline-info">
+                      <a href="/cardapio/add">
+                        <i class="material-icons">create</i>
+                      </a>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-outline-danger">
+                      <a href="/cardapio/delete/{{ p.id }}">
+                        <i class="material-icons">delete</i>
+                      </a>
+                    </button>
+                  </td>
+                </tr>
+              @endeach
+            </tbody>
+          </table>
+        </div>
+          <button class="btn btn-danger">
+            <a href="/cardapio/add">
+              <i class="material-icons md-light">add</i>
+            </a>
+          </button>
+      </div>
+    </div>
+  </div>
+@endsection
+    
+ 

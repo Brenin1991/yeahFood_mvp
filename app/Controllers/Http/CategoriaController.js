@@ -3,14 +3,15 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Database = use('Database')
+const Categoria = use('App/Models/Categoria')
 /**
- * Resourceful controller for interacting with pedidos
+ * Resourceful controller for interacting with categorias
  */
-class PedidoController {
+class CategoriaController {
   /**
-   * Show a list of all pedidos.
-   * GET pedidos
+   * Show a list of all categorias.
+   * GET categorias
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -19,12 +20,12 @@ class PedidoController {
    */
   async index ({ request, response, view }) {
 
-    
+
   }
 
   /**
-   * Render a form to be used for creating a new pedido.
-   * GET pedidos/create
+   * Render a form to be used for creating a new categoria.
+   * GET categorias/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -32,24 +33,29 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-
-    return view.render('admin.pedido.pedido')
+    const categorias = (await Database.select('*').from('categorias'))
+    return view.render('admin.cardapio.categoria.create', {categorias})
   }
 
   /**
-   * Create/save a new pedido.
-   * POST pedidos
+   * Create/save a new categoria.
+   * POST categorias
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const categoria = await Database.table('categorias').insert({
+      nome: request.input('nome')
+    })
+
+    response.redirect('/categoria/add')
   }
 
   /**
-   * Display a single pedido.
-   * GET pedidos/:id
+   * Display a single categoria.
+   * GET categorias/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -60,8 +66,8 @@ class PedidoController {
   }
 
   /**
-   * Render a form to update an existing pedido.
-   * GET pedidos/:id/edit
+   * Render a form to update an existing categoria.
+   * GET categorias/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -72,8 +78,8 @@ class PedidoController {
   }
 
   /**
-   * Update pedido details.
-   * PUT or PATCH pedidos/:id
+   * Update categoria details.
+   * PUT or PATCH categorias/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -83,15 +89,22 @@ class PedidoController {
   }
 
   /**
-   * Delete a pedido with id.
-   * DELETE pedidos/:id
+   * Delete a categoria with id.
+   * DELETE categorias/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const { id } = params
+
+    const categoria = await Categoria.find(id)
+
+    await categoria.delete()
+
+    response.redirect('/categoria/add')
   }
 }
 
-module.exports = PedidoController
+module.exports = CategoriaController

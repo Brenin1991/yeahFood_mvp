@@ -3,14 +3,16 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Database = use('Database')
+const Produto = use('App/Models/Produto')
+const Categoria = use('App/Models/Categoria')
 /**
- * Resourceful controller for interacting with pedidos
+ * Resourceful controller for interacting with produtos
  */
-class PedidoController {
+class ProdutoController {
   /**
-   * Show a list of all pedidos.
-   * GET pedidos
+   * Show a list of all produtos.
+   * GET produtos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -18,13 +20,13 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-
-    
+    const produtos = (await Database.select('*').from('produtos'))
+    return view.render('admin.cardapio.cardapio', {produtos})
   }
 
   /**
-   * Render a form to be used for creating a new pedido.
-   * GET pedidos/create
+   * Render a form to be used for creating a new produto.
+   * GET produtos/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -32,24 +34,34 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-
-    return view.render('admin.pedido.pedido')
+    const categorias = (await Database.select('*').from('categorias'))
+    return view.render('admin.cardapio.create', {categorias})
   }
 
   /**
-   * Create/save a new pedido.
-   * POST pedidos
+   * Create/save a new produto.
+   * POST produtos
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const produto = await Database.table('produtos').insert({
+      nome: request.input('nome'),
+      descricao: request.input('descricao'),
+      imagem: request.input('imagem'),
+      preco: request.input('preco'),
+      categoria_id: request.input('categoria_id'),
+      disponivel: false
+    })
+
+    response.redirect('/complemento/add')
   }
 
   /**
-   * Display a single pedido.
-   * GET pedidos/:id
+   * Display a single produto.
+   * GET produtos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -60,8 +72,8 @@ class PedidoController {
   }
 
   /**
-   * Render a form to update an existing pedido.
-   * GET pedidos/:id/edit
+   * Render a form to update an existing produto.
+   * GET produtos/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -72,8 +84,8 @@ class PedidoController {
   }
 
   /**
-   * Update pedido details.
-   * PUT or PATCH pedidos/:id
+   * Update produto details.
+   * PUT or PATCH produtos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -83,8 +95,8 @@ class PedidoController {
   }
 
   /**
-   * Delete a pedido with id.
-   * DELETE pedidos/:id
+   * Delete a produto with id.
+   * DELETE produtos/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -94,4 +106,4 @@ class PedidoController {
   }
 }
 
-module.exports = PedidoController
+module.exports = ProdutoController
