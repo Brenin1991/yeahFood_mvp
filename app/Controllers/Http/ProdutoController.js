@@ -3,9 +3,9 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-const Database = use('Database')
-const Produto = use('App/Models/Produto')
-const Categoria = use('App/Models/Categoria')
+const Database = use('Database');
+const Produto = use('App/Models/Produto');
+const Categoria = use('App/Models/Categoria');
 /**
  * Resourceful controller for interacting with produtos
  */
@@ -21,6 +21,7 @@ class ProdutoController {
    */
   async index ({ request, response, view }) {
     const produtos = (await Database.select('*').from('produtos'))
+
     return view.render('admin.cardapio.cardapio', {produtos})
   }
 
@@ -47,16 +48,15 @@ class ProdutoController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const produto = await Database.table('produtos').insert({
+    const produto = await Produto.create({
       nome: request.input('nome'),
       descricao: request.input('descricao'),
       imagem: request.input('imagem'),
       preco: request.input('preco'),
       categoria_id: request.input('categoria_id'),
-      disponivel: false
     })
 
-    response.redirect('/complemento/add')
+    response.redirect('/cardapio')
   }
 
   /**
@@ -69,6 +69,19 @@ class ProdutoController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const { id } = params
+    const produto = await Produto.find(id)
+    const categoria = await Categoria.find(produto.categoria_id)
+
+    const produtosComplementos = (await Database.select('*')
+      .from('complementos')
+      .join('produto_complementos', 'complementos.id', 'produto_complementos.complemento_id')
+      .where('produto_id', produto.id))
+
+    const complementos = (await Database.select('*')
+      .from('complementos'))
+
+    return view.render('admin.cardapio.show', {produto, categoria, produtosComplementos, complementos})
   }
 
   /**
@@ -83,6 +96,25 @@ class ProdutoController {
   async edit ({ params, request, response, view }) {
   }
 
+  async ativarProduto ({ params, request, response, view }) {
+    const { id } = params
+    const produto = await Produto.find(id)
+    if(produto.disponivel){
+      produto.disponivel = false
+    } else {
+      produto.disponivel = true
+    }
+
+    await produto.save()
+    response.redirect('/cardapio')
+  }
+
+  async edit ({ params, request, response, view }) {
+    const { id } = params
+    const produtosComplementos = await ProdutoComplemento.find(id)
+
+    await categoria.delete()
+  }
   /**
    * Update produto details.
    * PUT or PATCH produtos/:id
@@ -102,8 +134,16 @@ class ProdutoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+
+   async destroy ({ params, request, response }) {
+    const { id } = params
+    const produto = await Produto.find(id)
+
+    await produto.delete()
+
+    response.redirect('/cardapio')
   }
+  
 }
 
 module.exports = ProdutoController

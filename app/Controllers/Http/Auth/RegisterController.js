@@ -2,6 +2,8 @@
 
 const { validateAll } = use('Validator')
 const User = use('App/Models/User')
+const Endereco = use('App/Models/Endereco')
+const Telefone = use('App/Models/Telefone')
 const randomString = require('random-string')
 const Mail = use('Mail')
 
@@ -30,6 +32,20 @@ class RegisterController {
       email: request.input('email'),
       password: request.input('password'),
       confirmation_token: randomString({ length: 40 })
+    })
+
+    const endereco = await Endereco.create({
+      rua: request.input('rua'),
+      numero: request.input('numero'),
+      ponto_referencia: request.input('ponto_referencia'),
+      user_id: user.id,
+      cidade: request.input('cidade'),
+      bairro: request.input('bairro')
+    })
+
+    const telefone = await Telefone.create({
+      telefone: request.input('telefone'),
+      user_id: user.id
     })
 
     // send confirmation email

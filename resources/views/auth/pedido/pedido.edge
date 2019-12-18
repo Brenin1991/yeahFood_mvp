@@ -1,0 +1,52 @@
+@layout('layout.app')
+
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="card-header card-header-danger">
+              @if(pedido[0] && pedido[0].status != 'CR' && pedido[0].status != 'CA')
+                <h4 class="card-title mt-0"> Pedido <strong>(R$ {{ pedido[0].valor }})</strong></h4>
+                <p class="card-category"> Código: {{pedido[0].id}}</p>
+              @else
+                <h4 class="card-title mt-0"> Pedido </h4>
+                <p class="card-category"> Seus pedidos</p>
+              @endif
+            </div>
+            <div class="card-body">
+                @if(pedido[0] && pedido[0].status != 'CR' && pedido[0].status != 'CA')
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <td class="text-danger">Data</td>
+                    <td>{{pedido[0].data}}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-danger">Pagamento</td>
+                    <td>Débito</td>
+                  </tr>
+                  <tr>
+                    <td class="text-danger">Status</td>
+                    @if(pedido[0].status == 'PE')
+                      <td>Pendente</td>
+                    @elseif(pedido[0].status == 'FN')
+                      <td><a class="text-success">Finalizado (aguarde a entrega)</a></td>
+                    @endif
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            @else
+              Não há pedidos
+            @endif
+            <div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+@endsection
+    
+ 

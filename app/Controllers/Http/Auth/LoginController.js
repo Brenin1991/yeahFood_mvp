@@ -25,8 +25,12 @@ class LoginController {
       if (passwordVerified) {
         // login user
         await auth.remember(!!remember).login(user)
-
-        return response.route('/')
+        if(user.admin === true){
+          return response.route('/dashboard')
+        } else {
+          return response.route('/')
+        }
+        
       }
     }
 

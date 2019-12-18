@@ -4,12 +4,12 @@
 const Model = use('Model')
 
 class Endereco extends Model {
-	bairros () {
+	bairro () {
     	return this.hasOne('App/Models/Bairro')
   	}
 
-  	cidades () {
-    	return this.hasOne('App/Models/Cidade')
+  	user () {
+    	return this.belongsTo('App/Models/User')
   	}
 }
 

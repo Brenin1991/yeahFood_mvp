@@ -1,0 +1,75 @@
+@layout('admin.layout.app')
+
+@section('content')
+<div class="row">
+  <div class="col-md-12">
+      <div class="card card-plain">
+          <div class="card-header card-header-danger">
+              <h4 class="card-title mt-0"> Pedido de {{user[0].username}} ({{pedido[0].data}})</h4>
+              <p class="card-category"> Código {{pedido[0].id}}</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+              <thead class=" text-danger">
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor unidade</th>
+                <th>Valor total</th>
+              </thead>
+              <tbody>
+                @each(p in produtos)
+                  <tr>
+                    <td>{{p.nome}}</td>
+                    <td>{{p.quantidade}}</td>
+                    <td>R$ {{p.preco}}</td>
+                    <td>R$ {{p.preco * p.quantidade}}</td>
+                  </tr>
+                @endeach
+              </tbody>
+            </table>
+          </div>
+            <div>
+              
+              Valor total: <strong> R$ {{pedido[0].valor}} </strong>
+              
+              <form class="d-inline" action="{{ route('pedido.finalizarPedido', {id: pedido[0].id }) + '?_method=PUT' }}" method="POST">
+                  {{ csrfField() }}
+                <button type="submit" class="btn btn-danger pull-right">
+                  Finalizar pedido
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title mt-0"> Informações</h4>
+                    <p class="card-category"> Informações de {{user[0].username}}</p>
+                </div>
+            <div class="card-body">
+
+              <div class="form-group">
+                <a><strong>Localização: </strong> Rua {{endereco[0].rua}}, {{endereco[0].numero}} - {{endereco[0].bairro}} - {{endereco[0].cidade}}
+                </a>
+              </div>
+              <div class="form-group">
+                <a><strong>Ponto de referência: </strong>{{endereco[0].ponto_referencia}}
+                </a>
+              </div>
+              <div class="form-group">
+                <a><strong>Telefone: </strong> {{telefones[0].telefone}}</a>
+              </div>
+            <div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  @endsection
+    
+ 

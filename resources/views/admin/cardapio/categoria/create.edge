@@ -1,50 +1,64 @@
 @layout('admin.layout.app')
 
 @section('content')
-<div class="container">
-
-  <div class="card card-signin my-5 text-center">
-    <div class="card-body">
-      <h3 class="card-title">Adicionar Categoria</h3>
-      <form action="/categoria/add" method="post">
-        {{ csrfField() }}
-        <div class="form-group">
-        	<input class="form-control" type="text" name="nome" placeholder="Nome" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title mt-0"> Cadastrar categoria</h4>
+                <p class="card-category"> Cadastrar nova categoria para seus produtos</p>
+            </div>
+            <div class="card-body">
+              <form action="{{ route('categoria.store') }}" method="post">
+                {{ csrfField() }}
+                <div class="form-group">
+                	<input class="form-control" type="text" name="nome" placeholder="Nome" />
+                </div>
+                
+                <button class="btn btn-danger my-2 my-sm-0 pull-right" type="submit">Cadastrar</button>
+              </form>
+            </div>
         </div>
-        
-        <button class="btn btn-danger my-2 my-sm-0" type="submit">Cadastrar</button>
-      </form>
     </div>
-  </div>
 
-  <div class="card card-signin my-5 text-center">
-      <div class="card-body">
-        <h3 class="card-title">Categorias
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
+
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title mt-0"> Categorias</h4>
+                <p class="card-category"> Gerenciar categorias</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+            
+              <thead class=" text-danger">
                 <th scope="col">Nome</th>
-                <th scope="col">Excluir</th>
-              </tr>
-            </thead>
-            <tbody>
-              @each(c in categorias)
-                <tr>
-                  <td><a>{{c.nome}}</a></td>                  
-                  <td>
-                    <button class="btn btn-outline-danger">
-                      <a href="/categoria/delete/{{ c.id }}">
-                        <i class="material-icons">delete</i>
-                      </a>
-                    </button>
-                  </td>
-                </tr>
-              @endeach
-            </tbody>
-          </table>
+                <th scope="col">Ação</th>
+              </thead>
+              <tbody>
+                @each(c in categorias)
+                  <tr>
+                    <td><a>{{c.nome}}</a></td>                  
+                    <td>
+                      <form class="d-inline" action="{{ route('categoria.destroy', {id: c.id }) + '?_method=DELETE' }}" method="POST">
+                        {{ csrfField() }}
+                        <button type="submit" class="btn btn-link btn-danger">
+                          Remover
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                @endeach
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+  </div>
+
+
 </div>
+
+
 @endsection

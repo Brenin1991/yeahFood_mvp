@@ -4,8 +4,8 @@
 const Model = use('Model')
 
 class Pedido extends Model {
-	pedido_produtos () {
-    	return this.hasMany('App/Models/PedidoProduto')
+	pagamento () {
+    	return this.hasOne('App/Models/Pagamento')
   	}
 }
 

@@ -3,8 +3,8 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-const Database = use('Database')
-const Categoria = use('App/Models/Categoria')
+const Database = use('Database');
+const Categoria = use('App/Models/Categoria');
 /**
  * Resourceful controller for interacting with categorias
  */
@@ -19,8 +19,6 @@ class CategoriaController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-
-
   }
 
   /**
@@ -46,10 +44,10 @@ class CategoriaController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const categoria = await Database.table('categorias').insert({
+    const categoria = await Categoria.create({
       nome: request.input('nome')
     })
-
+  
     response.redirect('/categoria/add')
   }
 
@@ -98,12 +96,9 @@ class CategoriaController {
    */
   async destroy ({ params, request, response }) {
     const { id } = params
-
     const categoria = await Categoria.find(id)
 
     await categoria.delete()
-
-    response.redirect('/categoria/add')
   }
 }
 

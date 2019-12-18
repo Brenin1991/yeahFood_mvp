@@ -1,29 +1,82 @@
 @layout('layout.app')
 
 @section('content')
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5 text-center">
-          <div class="card-body">
-            <h3 class="card-title">Registrar</h3>
-              @include('includes.notification')
-              <form action="{{ route('register') }}" method="post">
-                {{ csrfField() }}
-                <div class="form-group"><input class="form-control input {{ hasErrorFor('username') ? 'is-danger' : '' }}" id="exampleInputEmail1" type="text" name="username" placeholder="Nome" /></div>
-                {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
-
-                <div class="form-group"><input class="form-control input {{ hasErrorFor('email') ? 'is-danger' : '' }}" id="exampleInputEmail1" type="email" name="email" placeholder="E-mail" /></div>
-                {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
-
-                <div class="form-group"><input class="form-control input {{ hasErrorFor('password') ? 'is-danger' : '' }}" id="exampleInputPassword1" type="password" name="password" placeholder="Senha" /></div>
-                {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
-
-                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Registrar</button>
-              </form>
-          </div>
-        </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Registrar</h4>
       </div>
+      <div class="card-body"> 
+        @include('includes.notification')
+        <form action="{{ route('register') }}" method="post">
+          {{ csrfField() }}
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <input class="form-control input {{ hasErrorFor('username') ? 'is-danger' : '' }}" id="exampleInputEmail1" type="text" name="username" placeholder="Nome" />
+              </div>
+            {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <input class="form-control input {{ hasErrorFor('email') ? 'is-danger' : '' }}" id="exampleInputEmail1" type="email" name="email" placeholder="E-mail" />
+              </div>
+            {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+            </div>
+            
+            <div class="col-md-3">
+              <div class="form-group">
+                <input class="form-control input {{ hasErrorFor('password') ? 'is-danger' : '' }}" id="exampleInputPassword1" type="password" name="password" placeholder="Senha" />
+              </div>
+            {{ elIf('<span class="help is-danger">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <input class="form-control" type="text" name="telefone" placeholder="Telefone" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <input class="form-control"type="text" name="rua" placeholder="Rua" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <input class="form-control"type="text" name="numero" placeholder="Número" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <input class="form-control"type="text" name="cidade" placeholder="Cidade" />
+              </div>
+            </div>     
+            <div class="col-md-3">
+              <div class="form-group">
+                <input class="form-control"type="text" name="bairro" placeholder="Bairro" />
+              </div>
+            </div>
+          </div>
+           <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Ponto de referência</label>
+                <div class="form-group">
+                  <label class="bmd-label-floating"> Exemplo: Perto da prefeitura.</label>
+                  <textarea class="form-control" name="ponto_referencia" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group pull-right">
+            <button class="btn btn-outline-danger my-2 my-sm-0 pull-right" type="submit">Registrar</button>
+          </div>
+          <div class="clearfix"></div>
+      </form>
+    </div>
     </div>
   </div>
+</div>
 @endsection

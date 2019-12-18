@@ -13,10 +13,9 @@
 
     <!-- Stylesheets -->
     <link href="plugin-frameworks/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link href="plugin-frameworks/swiper.css" rel="stylesheet">
-    <link href="fonts/ionicons.css" rel="stylesheet">
     <link href="common/styles.css" rel="stylesheet">
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </head>
 
 <body>
@@ -89,31 +88,38 @@
                     <!--col-sm-12-->
                 </div>
                 <!--row-->
-                    
-                <div class="row">
-                    @each(c in cardapio)
-                    <div class="col-md-6 food-menu pizza">
-                        <div class="sided-90x mb-30 ">
-                            <div class="s-left"><img class="br-3" src="{{ c.imagem }}" alt="Menu Image">
+                <form action="{{ route('carrinho.add') }}" method="post">
+                    {{ csrfField() }}
+                    <div class="row">   
+                    @each(p in produtos)
+                        <div class="col-md-6 food-menu pizza">
+                            <div class="sided-90x mb-30">
+                                <div class="s-left"><img src="{{p.imagem}}" class="br-3" src="" alt="Menu Image" /></div>
+                                <!-- s-left-->
+                                <div class="s-right">
+                                    <h5 class="mb-10"><b>{{p.nome}}</b><b class="color-primary float-right">{{p.preco}}</b></h5>
+                                    <p class="pr-70">{{p.descricao}}</p>
+                                </div>
+                                <div class="input-group mb-3">
+                                    
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="produto_id" value="{{p.id}}" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!--s-left-->
-                            <div class="s-right">
-                                <h5 class="mb-10"><b>{{{ c.nome }}</b><b class="color-primary float-right">{{ c.preco }}</b></h5>
-                                <p class="pr-70">{{ c.descricao }}</p>
-                                <button class="btn btn-outline-warning">
-                                    <a href="#">
-                                        Adicionar ao carrinho
-                                        <ion-icon name="cart"></ion-icon>
-                                    </a>
-                                </button>
-                            </div>
-                            <!--s-right-->
                         </div>
-                        <!-- sided-90x -->
-                    </div>
                     <!-- food-menu -->
                     @endeach
-                </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-warning">
+                                Adicionar ao carrinho
+                                <ion-icon name="cart"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         <!-- container -->
         @else
@@ -134,24 +140,21 @@
                     <!--col-sm-12-->
                 </div>
                 <!--row-->
-                @each(c in cardapio)
-                    <div class="row">
-                        <div class="col-md-6 food-menu pizza">
-                            <div class="sided-90x mb-30 ">
-                                <div class="s-left"><img class="br-3" src="{{ c.imagem }}" alt="Menu Image"></div>
-                                <!--s-left-->
+                <div class="row">
+                @each(p in produtos)
+                    <div class="col-md-6 food-menu pizza">
+                            <div class="sided-90x mb-30">
+                                <div class="s-left"><img src="{{p.imagem}}" class="br-3" src="" alt="Menu Image" /></div>
+                                <!-- s-left-->
                                 <div class="s-right">
-                                    <h5 class="mb-10"><b>{{{ c.nome }}</b><b class="color-primary float-right">{{ c.preco }}</b></h5>
-                                    <p class="pr-70">{{ c.descricao }}</p>
+                                    <h5 class="mb-10"><b>{{p.nome}}</b><b class="color-primary float-right">{{p.preco}}</b></h5>
+                                    <p class="pr-70">{{p.descricao}}</p>
                                 </div>
-                                <!--s-right-->
                             </div>
-                            <!-- sided-90x -->
                         </div>
-                        <!-- food-menu -->
-                    </div>
                     <!-- row -->
                 @endeach
+                </div>
 
                 <h6 class="center-text mt-40 mt-sm-20 mb-30"><a href="#" class="btn-primaryc plr-25"><b>FAZER LOGIN AGORA!</b></a></h6>
             </div>
@@ -194,6 +197,10 @@
                 Copyright &copy;
                 <script>
                     document.write(new Date().getFullYear());
+
+                    $("document")ready(function(){
+                        $("#checkbox1").attr('value', true)
+                    })
                 </script> All rights reserved | This template is made with <i class="ion-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>

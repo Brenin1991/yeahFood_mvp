@@ -1,89 +1,39 @@
 @layout('admin.layout.app')
 
 @section('content')
-  <div class="container">
-    <div class="navbar-wrapper">
-      <a class="navbar-brand" href="#pablo">Pedidos</a>
-    </div>
-    <div class="card card-signin my-5 text-center">
-      <div class="card-body">
-        <h3 class="card-title">Pedidos <span class="badge badge-warning">1</span></h3>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Data</th>
-                <th scope="col">Pegamento</th>
-                <th scope="col">Status</th>
-                <th scope="col">Informações</th>
-                <th scope="col">Finalizar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td><a href="#">Breno</a></td>
-                <td>16/11/2019 13:50</td>
-                <td>Debito</td>
-                <td>Pendente</td>
-                <td>
-                  <button type="button" class="btn btn-outline-info">
-                    <i class="material-icons">remove_red_eye</i>
-                  </button>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-outline-success">
-                    <i class="material-icons">check</i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+<div class="row">
+  <div class="col-md-12">
+      <div class="card card-plain">
+          <div class="card-header card-header-danger">
+              <h4 class="card-title mt-0"> Pedidos</h4>
+              <p class="card-category"> Lista de pedidos</p>
+          </div>
+          <div class="card-body">
+            @if(pedidos[0])
+              <div class="table-responsive">
+                <table class="table table-hover">
+                <thead class=" text-danger">
+                  <th>Código</th>
+                  <th>Data</th>
+                  <th>Pedido</th>
+                </thead>
+                <tbody>
+                  @each(p in pedidos)
+                    <tr>
+                      <td>{{p.id}}</td>
+                      <td>{{p.data}}</td>
+                      <td><a href="{{ route('pedidos.show', {id: p.id}) }}" class="text-danger">Ver</a></td>
+                    </tr>
+                  @endeach
+                </tbody>
+              </table>
+            </div>
+            @else
+              Não há pedidos
+            @endif
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="card card-signin my-5 text-center">
-      <div class="card-body">
-        <h3 class="card-title">Pedidos <span class="badge badge-warning">1</span></h3>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Data</th>
-                <th scope="col">Pegamento</th>
-                <th scope="col">Status</th>
-                <th scope="col">Informações</th>
-                <th scope="col">Finalizar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td><a href="#">Breno</a></td>
-                <td>16/11/2019 13:50</td>
-                <td>Debito</td>
-                <td>Pendente</td>
-                <td>
-                  <button type="button" class="btn btn-outline-info">
-                    <i class="material-icons">remove_red_eye</i>
-                  </button>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-outline-success">
-                    <i class="material-icons">check</i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   </div>
 @endsection
     

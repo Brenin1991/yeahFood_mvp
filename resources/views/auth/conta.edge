@@ -1,0 +1,68 @@
+@layout('layout.app')
+
+@section('content')
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title mt-0"> Perfil de {{user.username}}</h4>
+                <p class="card-category"> Editar informações</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="text-danger">Nome</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="username" value="{{user.username}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-danger">CPF</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="cpf" value="{{user.cpf}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-danger">Telefone</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="tel" class="form-control" name="telefone" value="{{telefones[0].telefone}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-danger">E-mail</td>
+                                <td>
+                                    <fieldset disabled>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="{{user.email}}"name="email"/>
+                                        </div>
+                                    </fieldset>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td class="text-danger">Endereço</td>
+                                <td>Rua {{endereco[0].rua}}, {{endereco[0].numero}} - {{endereco[0].bairro}} - {{endereco[0].cidade}} ({{endereco[0].ponto_referencia}}) <a href="#" class="text-danger" >Editar</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-danger">Pedidos</td>
+                                <td>{{pedidos}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <a href="#" class="btn btn-danger my-2 my-sm-0 pull-right">
+                    Atualizar
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+@endsection

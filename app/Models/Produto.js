@@ -4,12 +4,14 @@
 const Model = use('Model')
 
 class Produto extends Model {
-	pedido_produtos () {
-    	return this.hasMany('App/Models/PedidoProduto')
+	categoria () {
+    	return this.hasOne('App/Models/Categoria')
   	}
 
   	complementos () {
-    	return this.hasMany('App/Models/Complemento')
+    	return this.belongsToMany('App/Models/Complemento')
+    	.pivotTable('produto_complementos')
+    	.pivotModel('App/Models/ProdutoComplemento')
   	}
 }
 

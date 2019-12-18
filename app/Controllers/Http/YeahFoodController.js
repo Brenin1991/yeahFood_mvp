@@ -3,14 +3,19 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Database = use('Database');
+const Produto = use('App/Models/Produto');
+const User = use('App/Models/User');
+const Endereco = use('App/Models/Endereco');
+const Telefone = use('App/Models/Telefone');
+const Categoria = use('App/Models/Categoria');
 /**
- * Resourceful controller for interacting with produtos
+ * Resourceful controller for interacting with yeahfoods
  */
 class YeahFoodController {
   /**
-   * Show a list of all produtos.
-   * GET produtos
+   * Show a list of all yeahfoods.
+   * GET yeahfoods
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -18,13 +23,9 @@ class YeahFoodController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    const produtos = (await Database.select('*').from('produtos').where('disponivel', true))
 
-    return view.render('home')
-  }
-
-  async carrinho ({ request, response, view }) {
-
-    return view.render('auth.pedido.carrinho')
+    return view.render('home', {produtos})
   }
 
   async dashboard ({ request, response, view }) {
@@ -32,12 +33,22 @@ class YeahFoodController {
     return view.render('admin.home')
   }
 
+  async minhaConta ({ request, response, view, auth }) {
+    const user = await User.find(auth.user.id)
+    const endereco = (await Database.select('*').from('enderecos').where('user_id', user.id))
+    const telefones = (await Database.select('*').from('telefones').where('user_id', user.id))
+    const count = await Database
+      .from('pedidos').where('user_id', user.id)
+      .count()
 
+    const pedidos = count[0].count
 
+    return view.render('auth.conta', {user, endereco, telefones, pedidos})
+  }
 
   /**
-   * Render a form to be used for creating a new produto.
-   * GET produtos/create
+   * Render a form to be used for creating a new yeahfood.
+   * GET yeahfoods/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -48,8 +59,8 @@ class YeahFoodController {
   }
 
   /**
-   * Create/save a new produto.
-   * POST produtos
+   * Create/save a new yeahfood.
+   * POST yeahfoods
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -59,8 +70,8 @@ class YeahFoodController {
   }
 
   /**
-   * Display a single produto.
-   * GET produtos/:id
+   * Display a single yeahfood.
+   * GET yeahfoods/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -71,8 +82,8 @@ class YeahFoodController {
   }
 
   /**
-   * Render a form to update an existing produto.
-   * GET produtos/:id/edit
+   * Render a form to update an existing yeahfood.
+   * GET yeahfoods/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -83,8 +94,8 @@ class YeahFoodController {
   }
 
   /**
-   * Update produto details.
-   * PUT or PATCH produtos/:id
+   * Update yeahfood details.
+   * PUT or PATCH yeahfoods/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -94,8 +105,8 @@ class YeahFoodController {
   }
 
   /**
-   * Delete a produto with id.
-   * DELETE produtos/:id
+   * Delete a yeahfood with id.
+   * DELETE yeahfoods/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request

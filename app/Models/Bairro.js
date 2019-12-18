@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Bairro extends Model {
+	cidade () {
+    	return this.belongsTo('App/Models/Cidade')
+  	}
 }
 
 module.exports = Bairro

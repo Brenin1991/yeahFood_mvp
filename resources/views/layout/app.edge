@@ -1,71 +1,187 @@
+<!--
+=========================================================
+ Material Dashboard - v2.1.1
+=========================================================
+
+ Product Page: https://www.creative-tim.com/product/material-dashboard
+ Copyright 2019 Creative Tim (https://www.creative-tim.com)
+ Licensed under MIT (https://github.com/creativetimofficial/material-dashboard/blob/master/LICENSE.md)
+
+ Coded by Creative Tim
+
+=========================================================
+
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>YeahFood! - {{title}}</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="plugin-frameworks/swiper.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../YeahFood/6.png">
+  <link rel="icon" type="image/png" href="../YeahFood/6.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    YeahFood! - {{title}}
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../admin/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../common/style.css" rel="stylesheet" />
-
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-custom" >
-      <a class="navbar-brand logo-txt" href="/">YeahFood!</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <ion-icon name="menu"></ion-icon>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          @loggedIn
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 {{ auth.user.username }}
+<body class="">
+  <div class="wrapper" >
+    <div class="sidebar" data-color="danger" data-background-color="white" data-image="../YeahFood/1.png">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+      
+      <div class="sidebar-wrapper">
+        <div>
+          <ul class="nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                
+                  <p>YeahFood!</p>   
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/dashboard">Carrinho</a>
-                <a class="dropdown-item" href="#">Configurações da conta</a>
-                <a class="dropdown-item" href="#">Histórico de pedidos</a>
-                <a class="dropdown-item" href="/logout">Sair</a>
-              </div>
             </li>
-          @endloggedIn
-        </ul>
-        @loggedIn
-        <ul class="navbar-nav mr-auto">
-          
-        </ul>
-        
-        <div class="navbar-item has-dropdown is-hoverable">
-             
+          </ul>
         </div>
-        @else
-        <ul class="inline my-2 my-lg-0">
-          <a class="btn btn-outline-warning my-2 my-sm-0" href="/login" role="button" aria-pressed="true">Login</a>
-          <a class="btn btn-warning my-2 my-sm-0" href="/register" role="button" aria-pressed="true">Registrar</a>
-        </ul>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="material-icons">menu_book</i>
+              <p>Menu</p>
+            </a>
+          </li>
+          @loggedIn
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('carrinho') }}">
+              <i class="material-icons">shopping_cart</i>
+              <p>Carrinho</p>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ route('pedido') }}">
+              <i class="material-icons">fastfood</i>
+              <p>Pedidos</p>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ route('perfil') }}">
+              <i class="material-icons">person</i>
+              <p>Conta</p>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="/logout">
+              <i class="material-icons">emoji_people</i>
+              <p>Sair</p>
+            </a>
+          </li>
+        @else         
+          <li class="nav-item ">
+            <a class="nav-link" href="/login">
+              <i class="material-icons">face</i>
+              <p>Login</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/register">
+              <i class="material-icons">person_add</i>
+              <p>Cadastrar</p>
+            </a>
+          </li>
         @endloggedIn
-      </div>
-    </nav>
-  
-    <div class="section">
-      <div class="container">
-        @!section('content')
+        </ul>
       </div>
     </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="material-icons">reorder</i>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+              <!--<div class="container-fluid">-->
+          
+          @!section('content')
+              <!--</div>-->
+      </div>
+      
+    </div>
+  </div>
+  
+  <!--   Core JS Files   -->
+  <script src="../admin/assets/js/core/jquery.min.js"></script>
+  <script src="../admin/assets/js/core/popper.min.js"></script>
+  <script src="../admin/assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../admin/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../admin/assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../admin/assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../admin/assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <script src="../admin/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+  <!--  Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="../admin/assets/js/plugins/bootstrap-selectpicker.js"></script>
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <script src="../admin/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <script src="../admin/assets/js/plugins/jquery.dataTables.min.js"></script>
+  <!--  Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <script src="../admin/assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <script src="../admin/assets/js/plugins/jasny-bootstrap.min.js"></script>
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <script src="../admin/assets/js/plugins/fullcalendar.min.js"></script>
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <script src="../admin/assets/js/plugins/jquery-jvectormap.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="../admin/assets/js/plugins/nouislider.min.js"></script>
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+  <!-- Library for adding dinamically elements -->
+  <script src="../admin/assets/js/plugins/arrive.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chartist JS -->
+  <script src="../admin/assets/js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../admin/assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../admin/assets/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+  <script src="../admin/assets/demo/demo.js"></script>
+ 
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    });
+  </script>
 </body>
+
 </html>

@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Telefone extends Model {
+	user () {
+    	return this.belongsTo('App/Models/User')
+  	}
 }
 
 module.exports = Telefone

@@ -37,6 +37,11 @@ class User extends Model {
   pedidos () {
     return this.hasMany('App/Models/Pedido')
   }
+
+  endereco () {
+      return this.hasOne('App/Models/Endereco')
+  }
+
 }
 
 module.exports = User

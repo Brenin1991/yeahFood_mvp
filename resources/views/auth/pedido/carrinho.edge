@@ -1,67 +1,75 @@
 @layout('layout.app')
 
 @section('content')
-  <div class="container">
-        <div class="card card-signin my-5 text-center">
-          <div class="card-body">
-            <h3 class="card-title">Carrinho <span class="badge badge-info">9.99</span></h3>
-              <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Quantidade</th>
-                      <th scope="col">Observações</th>
-                      <th scope="col">Complementos</th>
-                      <th scope="col">Preço</th>
-                      <th scope="col">Excluir</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td><a href="#">X-Salada</a></td>
-                        <td><select class="custom-select" id="inputGroupSelect01" name="quantidade[{{c.id}}]"><option selected="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></td>
-                        <td>
-                           <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Ex: Sem queijo">
-                        </td>
-                        <td>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                              Dois hambúrg.
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                              Molho cheddar
-                            </label>
-                          </div>
-                        </td>
-                        <td>9.99</td>
-                        <td>
-                          <button class="btn btn-outline-danger">
-                            <a href="/cardapio/delete/{{ c.id }}">
-                              <ion-icon name="trash"></ion-icon>
-                            </a>
-                          </button>
-                        </td>
-                      </tr>
-                  </tbody>
-                </table>
-              </div>
-              
-              <button class="btn btn-outline-warning">
-                <a href="/cardapio/add">
-                  Fazer pedido <ion-icon name="send"></ion-icon>
-                </a>
-              </button>
-          </div>
-          </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="card-header card-header-danger">
+              @if(pedido)
+                <h4 class="card-title mt-0"> Carrinho <strong>(R$ {{ pedido[0].valor }})</strong></h4>
+                <p class="card-category"> Código: {{pedido[0].id}}</p>
+              @else
+                <h4 class="card-title mt-0"> Carrinho </h4>
+                <p class="card-category"> Seu carrinho</p>
+              @endif
+            </div>
+            <div class="card-body">
+                @if(pedido)
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class=" text-danger">
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Observações</th>
+                            <th>Valor unidade</th>
+                            <th>Valor total</th>
+                            <th>Ações</th>
+                        </thead>
+                        <tbody>
+                            @each(p in produtos)
+                            <tr>
+                                <td>{{p.nome}}</td>
+                                <td>{{p.quantidade}}</td>
+                                <td>{{p.observacao}}</td>
+                                <td>R$ {{p.preco}}</td>
+                                <td>R$ {{p.preco * p.quantidade}}</td>
+                                <td><a href="{{ route('pedido.atualizar', {id: p.id}) }}">editar</a></td>
+                            </tr>
+                            @endeach
+                        </tbody>
+                    </table>
+                </div>
+                @else 
+                <div>
+                  O carrinho está vazio 
+                </div>
+                @endif
+
+            </div>
+            <div>
+              @if(pedido)
+                    <div>
+                        <div>
+                            <form class="d-inline" action="{{ route('pedido.cancelarPedido', {id: pedido[0].id }) + '?_method=DELETE' }}" method="POST">
+                                {{ csrfField() }}
+                                <button type="submit" class="btn btn-outline-danger pull-left">
+                                    Cancelar
+                                </button>
+                            </form>
+                        </div>
+                        <div>
+                            <form class="d-inline" action="{{ route('pedido.efetuarPedido', {id: pedido[0].id }) + '?_method=PUT' }}" method="POST">
+                                {{ csrfField() }}
+                                <button type="submit" class="btn btn-danger pull-right">
+                                    Efetuar pedido
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                  @endif
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 @endsection
     
- 
