@@ -2,7 +2,6 @@
 __Versão:__ _1.0 MVP_ / __PT-BR__ / _2019 - Hard Rock Studio_
 
 ## Pré-requisitos
-#### Desenvolvimento
 * [Adonis.js (Framework back-end)](https://adonisjs.com/)
 * [PostgreSQL (Banco de dados SQL recomendado)](https://www.postgresql.org/)
 
