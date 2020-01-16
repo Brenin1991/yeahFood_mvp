@@ -15,6 +15,7 @@
 
 const Route = use('Route')
 Route.get('/', 'YeahFoodController.index')
+Route.get('/restaurante/:queryName', 'YeahFoodController.restaurante')
 
 //auth
 Route.get('register', 'Auth/RegisterController.showRegisterForm').middleware([
@@ -52,6 +53,9 @@ Route.post('atualizar', 'PedidoController.atualizarPedido').as('pedido.atualizar
 //perfil
 Route.get('perfil', 'YeahFoodController.minhaConta').as('perfil').middleware(['auth'
 ])
+Route.put('perfil/:id', 'YeahFoodController.update').as('perfil.update').middleware(['auth'
+])
+
 //----------------admin-----------------//
 //dashboard
 Route.get('dashboard', 'YeahFoodController.dashboard').as('dashboard').middleware([
@@ -67,24 +71,38 @@ Route.get('pedidos/:id', 'PedidoController.show').as('pedidos.show').middleware(
 Route.put('pedidos/:id', 'PedidoController.finalizarPedido').as('pedido.finalizarPedido').middleware([
   'admin', 'auth'
 ])
+
+//perfilAdmin
+Route.get('conta', 'YeahFoodController.adminConta').as('adminConta').middleware(['admin', 'auth'
+])
+
+//configRestaurante
+Route.get('restaurante', 'YeahFoodController.restauranteConta').as('restauranteConta').middleware(['admin', 'auth'
+])
+Route.put('restaurante/:id', 'YeahFoodController.restauranteContaUpdate').as('restauranteConta.update').middleware(['admin', 'auth'
+])
+
 //Route.get('ativarPedidos', 'PedidoController.ativarPedidos')
 //produto(cardapio)
-Route.get('cardapio', 'ProdutoController.index').as('produto.index').middleware([
+Route.get('produtos', 'ProdutoController.index').as('produto.index').middleware([
   'admin', 'auth'
 ])
-Route.get('cardapio/create', 'ProdutoController.create').as('produto.create').middleware([
+Route.get('produto/create', 'ProdutoController.create').as('produto.create').middleware([
   'admin', 'auth'
 ])
-Route.post('cardapio', 'ProdutoController.store').as('produto.store').middleware([
+Route.post('produto', 'ProdutoController.store').as('produto.store').middleware([
   'admin', 'auth'
 ])
-Route.get('cardapio/:id', 'ProdutoController.show').middleware([
+Route.get('produto/:id', 'ProdutoController.show').middleware([
   'admin', 'auth'
 ])
-Route.delete('cardapio/:id', 'ProdutoController.destroy').as('produto.destroy').middleware([
+Route.delete('produto/:id', 'ProdutoController.destroy').as('remover.destroy').middleware([
   'admin', 'auth'
 ])
-Route.put('cardapio/:id', 'ProdutoController.ativarProduto').as('produto.ativarProduto').middleware([
+Route.put('produto/:id', 'ProdutoController.ativarProduto').as('produto.ativarProduto').middleware([
+  'admin', 'auth'
+])
+Route.put('remover/:id', 'ProdutoController.update').as('produto.update').middleware([
   'admin', 'auth'
 ])
 //Categoria
@@ -108,5 +126,8 @@ Route.post('complemento/adicionar', 'ComplementoController.adicionar').middlewar
   'admin'
 ])
 Route.delete('complemento/:id', 'ComplementoController.destroy').middleware([
+  'admin'
+])
+Route.post('atendendo', 'YeahFoodController.atendendo').as('atendendo').middleware([
   'admin'
 ])

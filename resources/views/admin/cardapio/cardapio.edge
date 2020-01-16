@@ -9,6 +9,7 @@
                 <p class="card-category"> Cardápio do seu restaurante</p>
             </div>
             <div class="card-body">
+              @include('includes.notification')
                 <div class="table-responsive">
                     <table class="table table-hover">
                   <thead class=" text-danger">
@@ -19,7 +20,7 @@
                   <tbody>
                     @each(p in produtos)
                       <tr>
-                        <td><a href="cardapio/{{p.id}}" class="text-danger">{{p.nome}}</a></td>
+                        <td><a href="{{ route('remover.destroy', {id: p.id }) }}" class="text-danger">{{p.nome}}</a></td>
                         <td>{{p.preco}}</td>
                         <td>
                           @if(p.disponivel)

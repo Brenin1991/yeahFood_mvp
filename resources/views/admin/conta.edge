@@ -1,15 +1,16 @@
-@layout('layout.app')
+@layout('admin.layout.app')
 
 @section('content')
   <div class="row">
     <div class="col-md-12">
         <div class="card card-plain">
+             <form class="d-inline" action="{{ route('perfil.update', {id: user.id }) + '?_method=PUT' }}" method="POST">
+                {{ csrfField() }}
             <div class="card-header card-header-danger">
                 <h4 class="card-title mt-0"> Perfil de {{user.username}}</h4>
                 <p class="card-category"> Editar informações</p>
             </div>
-            <form class="d-inline" action="{{ route('perfil.update', {id: user.id }) + '?_method=PUT' }}" method="POST">
-                {{ csrfField() }}
+            
             <div class="card-body">
                 @include('includes.notification')
                 <div class="table-responsive">

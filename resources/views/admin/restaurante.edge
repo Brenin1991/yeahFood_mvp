@@ -1,0 +1,94 @@
+@layout('admin.layout.app')
+
+@section('content')
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card card-plain">
+
+            <div class="card-header card-header-danger">
+                <h4 class="card-title mt-0"> Restaurante</h4>
+                <p class="card-category"> Editar informações do restaurante</p>
+            </div>
+
+            <form class="d-inline" action="{{ route('restauranteConta.update', {id: restaurante[0].id }) + '?_method=PUT' }}" method="POST">
+                {{ csrfField() }}
+
+            <div class="card-body">
+                @include('includes.notification')
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="text-danger">Nome</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="nome" value="{{restaurante[0].nome}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-danger">Nome de pesquisa</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="query_name" value="{{restaurante[0].query_name}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-danger">Descrição</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="descricao" value="{{restaurante[0].descricao}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-danger">Imagem</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="imagem" value="{{restaurante[0].imagem}}"/>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-danger">Tempo entrega (minutos)</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" value="{{restaurante[0].tempo_medio}}" name="tempo_medio"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-danger">Taxa de entrega</td>
+                                <td><input type="number" class="form-control" value="{{restaurante[0].taxa_entrega}}" name="taxa_entrega"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <button type="submit" class="btn btn-danger pull-right">
+                    Atualizar
+                </button>
+              
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+    <form class="d-inline" action="{{ route('atendendo') }}" method="POST">
+        {{ csrfField() }}
+        <button type="submit" class="btn btn-danger pull-right">
+            @if(restaurante[0].atendendo)
+                atendendo
+            @else
+                não atendendo
+            @endif
+
+        </button>
+    </form>
+
+@endsection

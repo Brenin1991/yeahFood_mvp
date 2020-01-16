@@ -9,6 +9,7 @@
                 <p class="card-category"> Cadastrar novo produto ao cardápio</p>
             </div>
             <div class="card-body">
+              @include('includes.notification')
         <form action="{{ route('produto.store') }}" method="post">
           {{ csrfField() }}
           <div class="row">
@@ -26,30 +27,34 @@
           <div class="row">
             <div class="col-md-5">
               <div class="form-group">
-                <label class="bmd-label-floating">Nome</label>
+                <label class="bmd-label-floating">* Nome</label>
                 <input class="form-control" type="text" name="nome"/>
+                {{ elIf('<span><a class="text-danger">$self</a></span>', getErrorFor('nome'), hasErrorFor('nome')) }}
               </div>
             </div>  
             <div class="col-md-3">
               <div class="form-group">
-                <label class="bmd-label-floating">Imagem</label>
+                <label class="bmd-label-floating">* Imagem</label>
                 <input class="form-control" type="text" name="imagem"/>
+                {{ elIf('<span><a class="text-danger">$self</a></span>', getErrorFor('imagem'), hasErrorFor('imagem')) }}
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label class="bmd-label-floating">Preço</label>
+                <label class="bmd-label-floating">* Preço</label>
                 <input type="number" name="preco" value="9.99" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+                {{ elIf('<span><a class="text-danger">$self</a></span>', getErrorFor('preco'), hasErrorFor('preco')) }}
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label>Descrição</label>
+                <label>* Descrição</label>
                 <div class="form-group">
                   <label class="bmd-label-floating"> Exemplo: Pão, queijo, presunto, carne e molho.</label>
                   <textarea class="form-control" name="descricao" rows="5"></textarea>
+                  {{ elIf('<span><a class="text-danger">$self</a></span>', getErrorFor('descricao'), hasErrorFor('descricao')) }}
                 </div>
               </div>
             </div>

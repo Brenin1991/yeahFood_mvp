@@ -1,0 +1,105 @@
+@layout('layout.app')
+
+@section('content')
+
+@include('includes.notification')
+
+<div class="row">
+  <div class="col-lg-12 col-md-6 col-sm-6">
+    <div class="card card-profile">
+      <div class="card-avatar">
+        <a href="#pablo">
+          <img class="img" src="../cardapio/coca.jpg" />
+        </a>
+      </div>
+      <div class="card-body">
+        <p class="card-description text-gray"><strong>({{restaurante[0].query_name}})</strong></p>
+        <h4 class="card-title">{{restaurante[0].nome}}</h4>
+        <p class="card-description"><strong>{{restaurante[0].descricao}}</strong></p>
+      </div>
+    </div>
+
+        <div class="card card-pain">
+          <div class="card-body">
+
+            <p class="card-category"><i class="material-icons">room</i><strong> R. {{restaurante[0].rua}}  {{restaurante[0].numero}} - {{restaurante[0].bairro}}, {{restaurante[0].cidade}}
+            </strong></p>
+            <p class="card-category"><i class="material-icons">access_time</i><strong> {{restaurante[0].tempo_medio}} minutos
+            </strong></p>
+            <p class="card-category"><i class="material-icons">monetization_on</i><strong>   ENTREGA R${{restaurante[0].taxa_entrega}}
+            </strong></p>
+             @if(restaurante[0].atendendo)
+              <p class="card-category text-success"><i class="material-icons">store</i> Aberto (16h35 às 00hrs)</p>
+            @else
+              <p class="card-category text-danger"><i class="material-icons">store</i> Fechado (16h35 às 00hrs)</p>
+            @endif
+          </div>
+      </div>
+    </div>
+</div>
+
+@if(auth.user.username)
+  <form action="{{ route('carrinho.add') }}" method="post">
+  {{ csrfField() }}
+  <div class="row">
+    @each(p in produtos)
+    <div class="col-lg-4 col-md-2 col-sm-2">
+      <div class="card card-stats">
+        <div class="card-header card-header-primary card-header-icon">
+          <div class="card-icon">
+            <img src="../{{p.imagem}}" class="menu-image ">
+          </div>
+          <h3 class="card-title">{{p.nome}}</h3>
+          <p class="card-category">{{p.descricao}}</p>
+          <p class="card-category text-success">R${{p.preco}}</p>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <input type="checkbox" name="produto_id" value="{{p.id}}" />
+          </div>
+        </div>
+      </div>
+    </div>
+    @endeach
+    <input type="hidden" name="id_restaurant" value="{{restaurante[0].id}}" />
+    
+  </div>
+  <div class="col">
+      <button type="submit" class="btn btn-outline-danger">
+          Adicionar ao carrinho
+          <ion-icon name="cart"></ion-icon>
+      </button>
+    </div>
+  </form>
+@else
+  <div class="row">
+    @each(p in produtos)
+    <div class="col-lg-6 col-md-2 col-sm-2">
+      <div class="card card-stats">
+        <div class="card-header card-header-danger card-header-icon">
+          <div class="card-icon">
+            <img src="../{{p.imagem}}" class="menu-image ">
+          </div>
+          <h3 class="card-title">{{p.nome}}</h3>
+          <p class="card-category">{{p.descricao}}</p>
+          <p class="card-category text-success">R${{p.preco}}</p>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    @endeach
+    <input type="hidden" name="id_restaurant" value="{{restaurante[0].id}}" />
+    <div class="col">
+      <a href="/register" class="btn btn-outline-danger">
+          Entrar
+          <ion-icon name="cart"></ion-icon>
+      </a>
+    </div>
+  </div>
+@endif
+  
+@endsection

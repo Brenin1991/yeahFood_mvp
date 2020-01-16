@@ -6,7 +6,8 @@
         <div class="card card-plain">
             <div class="card-header card-header-danger">
               @if(pedido)
-                <h4 class="card-title mt-0"> Carrinho <strong>(R$ {{ pedido[0].valor }})</strong></h4>
+                <h4 class="card-title mt-0"> Carrinho <strong>(R$ {{ pedido[0].valor }} incluindo taxa de entrega de R$ {{restaurante[0].taxa_entrega}}) - 
+                    <a href="restaurante/{{restaurante[0].query_name}}">{{restaurante[0].nome}}</a></strong></h4>
                 <p class="card-category"> Código: {{pedido[0].id}}</p>
               @else
                 <h4 class="card-title mt-0"> Carrinho </h4>
@@ -14,6 +15,7 @@
               @endif
             </div>
             <div class="card-body">
+                @include('includes.notification')
                 @if(pedido)
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -23,17 +25,15 @@
                             <th>Observações</th>
                             <th>Valor unidade</th>
                             <th>Valor total</th>
-                            <th>Ações</th>
                         </thead>
                         <tbody>
                             @each(p in produtos)
                             <tr>
                                 <td>{{p.nome}}</td>
-                                <td>{{p.quantidade}}</td>
+                                <td><strong><a class="text-danger" href="{{ route('pedido.atualizar', {id: p.id}) }}">{{p.quantidade}}</a></strong></td>
                                 <td>{{p.observacao}}</td>
                                 <td>R$ {{p.preco}}</td>
                                 <td>R$ {{p.preco * p.quantidade}}</td>
-                                <td><a href="{{ route('pedido.atualizar', {id: p.id}) }}">editar</a></td>
                             </tr>
                             @endeach
                         </tbody>

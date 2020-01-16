@@ -14,6 +14,7 @@
               <thead class=" text-danger">
                 <th>Produto</th>
                 <th>Quantidade</th>
+                <th>Observação</th>
                 <th>Valor unidade</th>
                 <th>Valor total</th>
               </thead>
@@ -22,6 +23,7 @@
                   <tr>
                     <td>{{p.nome}}</td>
                     <td>{{p.quantidade}}</td>
+                    <td>{{p.observacao}}</td>
                     <td>R$ {{p.preco}}</td>
                     <td>R$ {{p.preco * p.quantidade}}</td>
                   </tr>

@@ -14,10 +14,15 @@
               @endif
             </div>
             <div class="card-body">
+              @include('includes.notification')
                 @if(pedido[0] && pedido[0].status != 'CR' && pedido[0].status != 'CA')
                 <div class="table-responsive">
                     <table class="table table-hover">
                 <tbody>
+                  <tr>
+                    <td class="text-danger">Restaurante</td>
+                    <td><a href="/restaurante/{{restaurante[0].query_name}}">{{restaurante[0].nome}}</a></td>
+                  </tr>
                   <tr>
                     <td class="text-danger">Data</td>
                     <td>{{pedido[0].data}}</td>
@@ -29,7 +34,7 @@
                   <tr>
                     <td class="text-danger">Status</td>
                     @if(pedido[0].status == 'PE')
-                      <td>Pendente</td>
+                      <td>Pendente (aguarde a finalização)</td>
                     @elseif(pedido[0].status == 'FN')
                       <td><a class="text-success">Finalizado (aguarde a entrega)</a></td>
                     @endif

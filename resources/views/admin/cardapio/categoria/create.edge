@@ -9,10 +9,13 @@
                 <p class="card-category"> Cadastrar nova categoria para seus produtos</p>
             </div>
             <div class="card-body">
+              @include('includes.notification')
               <form action="{{ route('categoria.store') }}" method="post">
                 {{ csrfField() }}
                 <div class="form-group">
-                	<input class="form-control" type="text" name="nome" placeholder="Nome" />
+                  <label class="bmd-label-floating">* Nome</label>
+                	<input class="form-control" type="text" name="nome" placeholder="" />
+                  {{ elIf('<span><a class="text-danger">$self</a></span>', getErrorFor('nome'), hasErrorFor('nome')) }}
                 </div>
                 
                 <button class="btn btn-danger my-2 my-sm-0 pull-right" type="submit">Cadastrar</button>

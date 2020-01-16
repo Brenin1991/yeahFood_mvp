@@ -3,8 +3,10 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-const Database = use('Database');
-const Categoria = use('App/Models/Categoria');
+const Database = use('Database')
+const Categoria = use('App/Models/Categoria')
+const Produto = use('App/Models/Produto')
+const { validate } = use('Validator')
 /**
  * Resourceful controller for interacting with categorias
  */
@@ -30,9 +32,9 @@ class CategoriaController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
-    const categorias = (await Database.select('*').from('categorias'))
-    return view.render('admin.cardapio.categoria.create', {categorias})
+  async create ({ request, response, view, auth}) {
+    const categorias = (await Database.select('*').from('categorias').where('id_restaurant', auth.user.id_restaurant))
+    return view.render('admin.cardapio.categoria.create', {categorias, title: `Categoria`})
   }
 
   /**
@@ -43,12 +45,35 @@ class CategoriaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, session, response, auth }) {
+    const msg = {
+      'nome.required':`Campo obrigatório.`,
+      'nome.min':`Deve ter mais de 5 caracteres.`
+    }
+
+    const validation = await validate(request.all(), {
+      nome: 'required|min:5'
+    }, msg)
+
+    if (validation.fails()) {
+      session.flash({
+        notification: {
+          type: `danger`,
+          message: `Os campos * são obrigatórios.`
+        }
+      })
+
+      session.withErrors(validation.messages())
+
+      return response.redirect('back')
+    }
+
     const categoria = await Categoria.create({
-      nome: request.input('nome')
+      nome: request.input('nome'),
+      id_restaurant: auth.user.id_restaurant
     })
   
-    response.redirect('/categoria/add')
+    response.redirect('back')
   }
 
   /**
@@ -96,9 +121,11 @@ class CategoriaController {
    */
   async destroy ({ params, request, response }) {
     const { id } = params
-    const categoria = await Categoria.find(id)
+    
+    const produtos = await Produto.query().where('categoria_id', id).delete()
+    const categoria = await Categoria.query().where('id', id).delete()
 
-    await categoria.delete()
+    response.redirect('back')
   }
 }
 

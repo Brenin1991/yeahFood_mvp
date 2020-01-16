@@ -3,9 +3,9 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-const Database = use('Database');
-const ProdutoComplemento = use('App/Models/ProdutoComplemento');
-const Complemento = use('App/Models/Complemento');
+const Database = use('Database')
+const ProdutoComplemento = use('App/Models/ProdutoComplemento')
+const Complemento = use('App/Models/Complemento')
 /**
  * Resourceful controller for interacting with complementos
  */
