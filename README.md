@@ -16,6 +16,6 @@ __Versão:__ _1.0 MVP_ / __PT-BR__ / _2019 - Hard Rock Studio_
 ![](https://github.com/Brenin1991/yeahfood/blob/master/arquivos/modelo%20relacional.png)
 
 ## Autoria e contribuições
-#### 2019 - Hard Rock Studio - [Site](https://hardrockstudio.github.io/HardRockStudio-Website/)
+#### [Site](http://yeahfood.herokuapp.com)
 ###### Desenvolvedor - Breno Campos Ribeiro - [Site](https://hardrockstudio.github.io/HardRockStudio-Website/)
 
