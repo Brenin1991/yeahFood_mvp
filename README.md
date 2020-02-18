@@ -7,7 +7,7 @@ __Versão:__ _1.0 MVP_ / __PT-BR__ / _2019 - Hard Rock Studio_
 * [PostgreSQL (Banco de dados SQL recomendado)](https://www.postgresql.org/)
 
 ## Documentação
-* [Visão](https://github.com/Brenin1991/yeahFood/blob/master/arquivos/Vis%C3%A3o.pdf)
+* [Google Drive](https://drive.google.com/open?id=18Fg7elk-XzWUAnUzA9_YST2qpRuZELQ_)
 
 ## Diagramas
 #### Diagrama de casos de uso
